@@ -3,13 +3,17 @@
 This is a [Next.js](https://nextjs.org/) template bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 # 1. Installation
-## Manual dependency installation
+
+## Initialize NextJS project
 
 ### First, initialize the NextJS project (with NPM):
 
 ```bash
 npx create-next-app nextjs-template --use-npm --typescript
 ```
+
+
+## Manual dependency installation
 
 ### Install dependencies:
 
