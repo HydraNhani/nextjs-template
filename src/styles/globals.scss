@@ -1,0 +1,14 @@
+@import "~tailwindcss/base";
+@import "~tailwindcss/components";
+@import "~tailwindcss/utilities";
+
+body {
+  @apply bg-lightmodebackground 
+  dark:bg-darkmodebackground 
+  text-lightmodetext 
+  dark:text-darkmodetext;
+  text-shadow: 0px 1px black;
+  background-size: cover;
+  flex-direction: column;
+  font-family: "SOME_FONT_FAMILY_HERE";
+}
