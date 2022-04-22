@@ -15,6 +15,7 @@ import { useRouter } from "next/router";
 import { useAuth } from "@lib/hooks";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "@lib/apolloClient";
+import config from "config.json";
 //Type imports
 import type { FC } from "react";
 import type { ComponentWithConfigurationProps, CustomComponentType } from "@types";
@@ -100,7 +101,8 @@ function MyApp({ Component, pageProps }: ComponentWithConfigurationProps) {
                 {/*Provider which adds React Query, a data fetching/caching service*/}
                 <MantineProvider
                     theme={{
-                        fontFamily: "SOME_FONT_FAMILY_HERE"
+                        fontFamily: "SOME_FONT_FAMILY_HERE",
+                        primaryColor: config.primaryColor
                     }}>
                     <NotificationsProvider> 
                         {/*Provider which adds Mantine, a CSS components/React hooks utility library*/}
