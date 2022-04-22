@@ -28,7 +28,7 @@ npm install <package_name>
 npm install graphql
 ```
 ```bash
-npm install react@17.0.2 react-dom@17.0.2 @apollo/client @headlessui/react @heroicons/react @mantine/core @mantine/hooks @mantine/next @mantine/notifications @prisma/client @reduxjs/toolkit @tailwindcss/forms apollo-server-micro class-validator firebase framer-motion graphql@15.8.0 graphql-fields graphql-scalars omit react-error-boundary react-firebase-hooks react-firebaseui react-redux redux reflect-metadata sass sharp tailwind-merge tslib type-graphql
+npm install react@17.0.2 react-dom@17.0.2 @apollo/client @headlessui/react @heroicons/react @mantine/core @mantine/hooks @mantine/next @mantine/notifications @prisma/client @reduxjs/toolkit @tailwindcss/forms apollo-server-micro class-validator firebase framer-motion graphql@15.8.0 graphql-fields graphql-scalars omit react-error-boundary react-firebase-hooks react-firebaseui react-redux redux reflect-metadata sass sharp tailwind-merge tslib type-graphql cookies-next
 ```
 
 [`@apollo/client`](https://www.apollographql.com/docs/react/) - A fully-featured caching GraphQL client. (required for GraphQL)

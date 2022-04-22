@@ -4,21 +4,23 @@ import "@styles/globals.scss";
 //Imports
 import Layout from "@components/Layout";
 import LoadingScreen from "@components/Layout/LoadingScreen";
-import Util from "@util";
 import FirebaseAuthProvider from "@components/AuthProvider";
 import { StrictMode as ReactStrictMode, useEffect, useState } from "react";
 import { Provider as ReduxProvider } from "react-redux";
 import { store } from "@actions/index";
-import { MantineProvider } from "@mantine/core";
+import { ColorSchemeProvider, MantineProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { useRouter } from "next/router";
 import { useAuth } from "@lib/hooks";
 import { ApolloProvider } from "@apollo/client";
 import { apolloClient } from "@lib/apolloClient";
-import config from "config.json";
+import { useColorScheme } from "@mantine/hooks";
+import { getCookie, setCookies } from "cookies-next";
 //Type imports
 import type { FC } from "react";
 import type { ComponentWithConfigurationProps, CustomComponentType } from "@types";
+import type { ColorScheme } from "@mantine/core";
+import config from "config.json";
 
 const CustomComponent: FC<{
     Component: CustomComponentType;
@@ -26,8 +28,6 @@ const CustomComponent: FC<{
 }> = ({ Component, pageProps }) => {
     //Router
     const router = useRouter();
-    //Dispatcher
-    const dispatch = Util.StateManagement.useDispatch();
     //Loading Screen
     const [done, setDone] = useState(
         !Component.authenticationRequired &&
@@ -38,24 +38,18 @@ const CustomComponent: FC<{
     const { user, loading } = useAuth();
     const isLoggedIn = !!user;
     //Mode
+    // hook will return either 'dark' or 'light' on client
+    // and always 'light' during ssr as window.matchMedia is not available
+    const preferredColorScheme: ColorScheme = useColorScheme();
+    const [colorScheme, setColorScheme] = useState(preferredColorScheme);
     useEffect(() => {
-        let mode = Util.getCookie("mode"); //Get mode from cookie
-        if (!mode || mode == "") {
-            //If mode is not set, set it to default
-            Util.setCookie(
-                "mode",
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-                    ? "dark"
-                    : "light",
-                730,
-                "/"
-            ); //Set mode cookie to default
-            mode = window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "dark"
-                : "light"; //Set mode state to default
-        }
-        dispatch(Util.StateManagement.loadMode(mode as "light" | "dark")); //Load mode
-        if (mode == "dark") document.documentElement.classList.add("dark"); //Add dark mode class for Tailwind CSS
+        const mode = getCookie("mode") as ColorScheme;
+        if (!mode) setCookies("mode", preferredColorScheme, {
+            expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 720),
+            path: "/"
+        });
+        setColorScheme(mode);
+        if (mode == "dark") document.documentElement.classList.add("dark");
     }, []);
     //Authentication
     useEffect(() => {
@@ -79,9 +73,26 @@ const CustomComponent: FC<{
     //If the user is logged in, grant access to the page
     if (done)
         return (
-            <Layout>
-                <Component {...pageProps} />
-            </Layout>
+            <ColorSchemeProvider toggleColorScheme={(value) => {
+                setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+                if (value == "dark") document.documentElement.classList.add("dark");
+                else document.documentElement.classList.remove("dark");
+            }} colorScheme={colorScheme}>
+                <MantineProvider
+                    withGlobalStyles
+                    withNormalizeCSS
+                    theme={{
+                        fontFamily: "SOME_FONT_FAMILY_HERE",
+                        colorScheme: colorScheme,
+                        primaryColor: config.primaryColor
+                    }}>
+                    <NotificationsProvider>
+                        <Layout>
+                            <Component {...pageProps} />
+                        </Layout>
+                    </NotificationsProvider>
+                </MantineProvider>
+            </ColorSchemeProvider>
         );
     //If authentication is required, but the user is not logged in, show the loading screen
     return <LoadingScreen />;
@@ -95,30 +106,13 @@ const CustomComponent: FC<{
 
 function MyApp({ Component, pageProps }: ComponentWithConfigurationProps) {
     return (
-        <ReactStrictMode>
-            {/*Provider which adds Strict Mode to our React application*/}
-            <ReduxProvider store={store}>
-                {/*Provider which adds React Query, a data fetching/caching service*/}
-                <MantineProvider
-                    theme={{
-                        fontFamily: "SOME_FONT_FAMILY_HERE",
-                        primaryColor: config.primaryColor
-                    }}>
-                    <NotificationsProvider> 
-                        {/*Provider which adds Mantine, a CSS components/React hooks utility library*/}
-                        <FirebaseAuthProvider>
-                            {/*Provider which adds Firebase Authentication, a service for managing user accounts*/}
-                            <ApolloProvider client={apolloClient}>
-                                {/*Provider which adds Apollo, a GraphQL client*/}
-                                <CustomComponent
-                                    Component={Component}
-                                    pageProps={pageProps}
-                                />
-                                {/*Component which handles authentication and loading screen*/}
-                            </ApolloProvider>
-                        </FirebaseAuthProvider>
-                    </NotificationsProvider>
-                </MantineProvider>
+        <ReactStrictMode> {/*Provider which adds Strict Mode to our React application*/}
+            <ReduxProvider store={store}> {/*Provider which adds Redux to our React application*/}
+                <FirebaseAuthProvider> {/*Provider which adds Firebase Authentication, a service for managing user accounts*/}
+                    <ApolloProvider client={apolloClient}> {/*Provider which adds Apollo, a GraphQL client*/}
+                        <CustomComponent Component={Component} pageProps={pageProps}/> {/*Component which handles authentication and loading screen*/}
+                    </ApolloProvider>
+                </FirebaseAuthProvider>
             </ReduxProvider>
         </ReactStrictMode>
     );

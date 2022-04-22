@@ -66,43 +66,6 @@ export default class Util {
         return check;
     };
     /**
-     * Sets a cookie on the client side
-     * @param {string} name The name of the cookie 
-     * @param {string} value The value of the cookie 
-     * @param {number} durationInDays The duration of expire date in days 
-     * @param {string?} path The path where the cookie is accessable
-     */
-    public static setCookie(name: string, value: any, durationInDays: number, path?: string) {
-        const date = new Date();
-        date.setTime(date.getTime() + (durationInDays * 24 * 60 * 60 * 1000));
-        document.cookie = `${name}=${value}; expires=${date.toUTCString()};${path ? ` path=${path}` : ""}`;
-    };
-    /**
-     * Gets a cookie on the client side
-     * @param {string} name The name of the cookie
-     */
-    public static getCookie(name: string) {
-        name += "=";
-        const decodedCookie = decodeURIComponent(document.cookie);
-        const cookieArray = decodedCookie.split(";");
-        for (let i = 0; i < cookieArray.length; i++) {
-            let content = cookieArray[i];
-            while (content.charAt(0) == " ") content = content.substring(1);
-            if (content.indexOf(name) == 0) return content.substring(name.length, content.length);
-        };
-        return "";
-    };
-    /**
-     * Deletes a cookie on the client side
-     * @param {string} name The name of the cookie 
-     * @param {string?} path The path where the cookie is accessable
-     */
-    public static deleteCookie(name: string, path?: string) {
-        if (Util.getCookie(name)) {
-            document.cookie = `${name}=${(path) ? ";path=" + path : ""};expires=Thu, 01 Jan 1970 00:00:01 GMT`;
-        };
-    };
-    /**
      * Rounds a number
      * @param {number} number The number to round 
      * @param {number} decimalPlaces The amount of decimal places that will be returned 

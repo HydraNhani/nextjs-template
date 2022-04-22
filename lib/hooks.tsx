@@ -85,9 +85,9 @@ export function useDescription() {
         (state) => state.layout
     );
     const dispatch = Util.StateManagement.useDispatch();
-    function setDescription(description: string) {
+    function setDescription(description?: string) {
         useEffect(() => {
-            dispatch(Util.StateManagement.setDescription(description));
+            dispatch(Util.StateManagement.setDescription(description || process.env.APPLICATION_DESCRIPTION));
         }, []);
     }
     return { description, setDescription };
