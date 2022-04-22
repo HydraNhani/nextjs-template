@@ -186,6 +186,10 @@ Also go to `./src/pages/_app.tsx` and go to the `MantineProvider` and edit the `
 
 `SOME_FONT_FAMILY_HERE` is the default value
 
+## Primary Color
+
+Edit the primary color by going to `./config.json` and edit the property `primaryColor`
+
 # Getting Started
 
 First, run the development server:
