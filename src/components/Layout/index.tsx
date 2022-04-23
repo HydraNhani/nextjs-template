@@ -3,14 +3,10 @@ import Head from "next/head";
 import Script from "next/script";
 import Util from "@util";
 import Header from "@components/Layout/Header";
-import type { HeaderMenuItems } from "@types";
+import type { MenuItems } from "@types";
 
-const menuItems: HeaderMenuItems = [
-    {
-        label: "Test",
-        link: "/test",
-        links: []
-    }
+const menuItems: MenuItems = [
+    
 ];
 
 const Layout: FC = ({ children }) => {

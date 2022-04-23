@@ -27,7 +27,7 @@ declare global {
 /* Redux */
 // Infer the `RootState` and `AppDispatch` types from the store itself
 import { store } from "@actions/index";
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof store.getState>;
 // Inferred type
 export type AppDispatch = typeof store.dispatch;
 //Mode type
@@ -38,7 +38,7 @@ export type LayoutProps = {
     header?: string;
     description: string;
     scripts?: Array<string>;
-    meta?: MetaProps
+    meta?: MetaProps;
 };
 export type MetaProps = {
     keywords?: string;
@@ -47,7 +47,7 @@ export type MetaProps = {
 /* NextJS */
 /**
  * Extra utility configurations for Next pages
- */ 
+ */
 export interface ComponentConfiguration {
     /**
      * Whether authentication is required to view the content of the website or not
@@ -107,12 +107,12 @@ export interface MotionProps {
 
 //Component Types
 import type { PropsWithChildren } from "react";
-export type LinkProps = PropsWithChildren<JSX.IntrinsicElements["a"]> & MotionProps & { 
-    href?: string 
+export type LinkProps = PropsWithChildren<JSX.IntrinsicElements["a"]> & MotionProps & {
+    href?: string;
 };
-export interface HeaderMenuItem {
+export interface MenuItem {
     link: string;
     label: string;
-    links?: Array<Omit<HeaderMenuItem, "links">>
+    links?: Array<Omit<MenuItem, "links">>;
 };
-export type HeaderMenuItems = Array<HeaderMenuItem>;
+export type MenuItems = Array<MenuItem>;
