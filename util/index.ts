@@ -1,4 +1,5 @@
-import type { AppDispatch, RootState, TypedUseSelectorHook, NotificationProps } from "@types";
+import type { AppDispatch, RootState, TypedUseSelectorHook } from "@types";
+import type { NotificationProps } from "@mantine/notifications";
 import { twMerge } from "tailwind-merge";
 import { actions } from "@actions/index";
 import { useDispatch, useSelector } from 'react-redux';

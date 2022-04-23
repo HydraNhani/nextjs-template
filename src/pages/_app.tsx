@@ -18,8 +18,7 @@ import { useColorScheme } from "@mantine/hooks";
 import { getCookie, setCookies } from "cookies-next";
 //Type imports
 import type { FC } from "react";
-import type { ComponentWithConfigurationProps, CustomComponentType } from "@types";
-import type { ColorScheme } from "@mantine/core";
+import type { ComponentWithConfigurationProps, CustomComponentType, ColorScheme } from "@types";
 import config from "config.json";
 
 const CustomComponent: FC<{

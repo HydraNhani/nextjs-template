@@ -1,9 +1,7 @@
 //File exports (if you need any types in this whole project, import it with @types)
 /* import type { SomeType } from "@types"; */
-export type * from "next";
-export type * from "react";
 export type * from "react-dom";
-export type * from "@mantine/notifications";
+export type * from "@mantine/core";
 export type * from "@apollo/client";
 export type * from "firebase/auth";
 export type * from "react-redux";
@@ -106,3 +104,15 @@ export interface MotionProps {
     disablemotion?: boolean;
     disablehovermotion?: boolean;
 };
+
+//Component Types
+import type { PropsWithChildren } from "react";
+export type LinkProps = PropsWithChildren<JSX.IntrinsicElements["a"]> & MotionProps & { 
+    href?: string 
+};
+export interface HeaderMenuItem {
+    link: string;
+    label: string;
+    links?: Array<Omit<HeaderMenuItem, "links">>
+};
+export type HeaderMenuItems = Array<HeaderMenuItem>;

@@ -1,13 +1,8 @@
-import type { PropsWithChildren } from "react";
 import NextLink from "next/link";
 import omit from "omit";
 import Motion from "@components/Motion";
-import type { MotionProps } from "@types";
 import { forwardRef } from "react";
-
-type LinkProps = PropsWithChildren<JSX.IntrinsicElements["a"]> & MotionProps & { 
-    href?: string 
-};
+import type { LinkProps } from "@types";
 
 const Link = forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => ( 
     <Motion disablemotion={props.disablemotion} disablehovermotion={props.disablehovermotion}>
