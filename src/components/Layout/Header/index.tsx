@@ -52,64 +52,66 @@ const Header: FC<{
                     <Link>
                         <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={Constants.APPLICATION_NAME} radius="xl" size={40} />
                     </Link>
-                    <Group spacing={5} className="hidden sm:flex">
+                    <Menu className="sm:hidden" size={260} placement="end" transition="pop-top-right" control={
+                            <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
+                        }>
+                            <Menu.Item component={Center}>
+                                <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={Constants.APPLICATION_NAME} radius="xl" size={40} />
+                            </Menu.Item>
+                            {links.map(link => (
+                                <Menu.Item component={Center} key={link.label}>
+                                    <HeaderLink href={link.link}>
+                                        {link.label}
+                                    </HeaderLink>
+                                </Menu.Item>
+                            ))}
+                            {user && <>
+                                <Menu.Label>User</Menu.Label>
+                                <Menu.Item component={Center}>
+                                    <Group spacing={7}>
+                                        <Avatar src={user.photoURL} alt={user.displayName!} radius="xl" size={20} />
+                                        <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+                                            {user.displayName}
+                                        </Text>
+                                    </Group>
+                                </Menu.Item>
+                                <Menu.Item component={Center}>
+                                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+                                        {user.email}
+                                    </Text>
+                                </Menu.Item>
+                                <HeaderAccountActions />
+                            </>}
+                            <Menu.Label>Theme</Menu.Label>
+                            <Menu.Item component={Center}>
+                                <ThemeToggler isMobile />
+                            </Menu.Item>
+                        </Menu>
+                    <Group className="hidden sm:flex" spacing={5} position="right">
                         {items}
                         {user &&
                             <Motion>
                                 <Menu size={260} placement="end" transition="pop-top-right" className="hidden sm:block"
                                     control={
-                                        <UnstyledButton>
-                                            <Group spacing={7}>
-                                                <Avatar src={user.photoURL} alt={user.displayName!} radius="xl" size={20} />
-                                                <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                                                    {user.displayName}
-                                                </Text>
-                                                <ChevronDownIcon className="h-3 w-3" />
-                                            </Group>
-                                        </UnstyledButton>
+                                        <Center>
+                                            <UnstyledButton>
+                                                <Group spacing={7}>
+                                                    <Avatar src={user.photoURL} alt={user.displayName!} radius="xl" size={20} />
+                                                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
+                                                        {user.displayName}
+                                                    </Text>
+                                                    <ChevronDownIcon className="h-3 w-3" />
+                                                </Group>
+                                            </UnstyledButton>
+                                        </Center>
                                     }
                                 >
                                     <HeaderAccountActions />
                                 </Menu>
                             </Motion>
                         }
+                        <ThemeToggler/>
                     </Group>
-                    <Menu className="sm:hidden" size={260} placement="end" transition="pop-top-right" control={
-                        <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
-                    }>
-                        <Menu.Item component={Center}>
-                            <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={Constants.APPLICATION_NAME} radius="xl" size={40} />
-                        </Menu.Item>
-                        {links.map(link => (
-                            <Menu.Item component={Center} key={link.label}>
-                                <HeaderLink href={link.link}>
-                                    {link.label}
-                                </HeaderLink>
-                            </Menu.Item>
-                        ))}
-                        {user && <>
-                            <Menu.Label>User</Menu.Label>
-                            <Menu.Item component={Center}>
-                                <Group spacing={7}>
-                                    <Avatar src={user.photoURL} alt={user.displayName!} radius="xl" size={20} />
-                                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                                        {user.displayName}
-                                    </Text>
-                                </Group>
-                            </Menu.Item>
-                            <Menu.Item component={Center}>
-                                <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                                    {user.email}
-                                </Text>
-                            </Menu.Item>
-                            <HeaderAccountActions />
-                        </>}
-                        <Menu.Label>Theme</Menu.Label>
-                        <Menu.Item component={Center}>
-                            <ThemeToggler isMobile />
-                        </Menu.Item>
-                    </Menu>
-                    <ThemeToggler />
                 </div>
             </Container>
         </MantineHeader>

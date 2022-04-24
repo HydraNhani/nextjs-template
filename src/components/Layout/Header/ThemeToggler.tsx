@@ -33,19 +33,17 @@ const ThemeToggler: FC<{ isMobile?: boolean; }> = ({ isMobile }) => {
         </Group>
     );
     else return (
-        <Group className="hidden sm:block" position="center">
-            <ActionIcon
-                onClick={() => toggleColorScheme()}
-                size="lg"
-                sx={(theme) => ({
-                    backgroundColor:
-                        theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-                    color: theme.colorScheme === 'dark' ? theme.colors.yellow[4] : theme.colors.blue[6],
-                })}
-            >
-                {colorScheme === 'dark' ? <Sun size={18} /> : <MoonStars size={18} />}
-            </ActionIcon>
-        </Group>
+        <ActionIcon
+            onClick={() => toggleColorScheme()}
+            size="lg"
+            sx={(theme) => ({
+                backgroundColor:
+                    theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
+                color: theme.colorScheme === 'dark' ? theme.colors.yellow[4] : theme.colors.blue[6],
+            })}
+        >
+            {colorScheme === 'dark' ? <Sun size={18} /> : <MoonStars size={18} />}
+        </ActionIcon>
     );
 };
 export default ThemeToggler;
