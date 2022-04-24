@@ -1,5 +1,3 @@
-const config = require("./config.json");
-
 module.exports = {
   content: [
     "./src/pages/**/*.tsx",
@@ -25,9 +23,6 @@ module.exports = {
         lightmodesecondary: "#a3a3a3",
         darkmodeprimary: "#111827",
         darkmodesecondary: "#1f2937",
-
-        //Some global colors regardless of light or dark mode
-        primary: config.primaryColor,
 
         //The contrast to the primary color
         primarycontrast: "#22c55e",

@@ -3,10 +3,11 @@ import Head from "next/head";
 import Script from "next/script";
 import Util from "@util";
 import Header from "@components/Layout/Header";
+import Footer from "@components/Layout/Footer";
 import type { MenuItems } from "@types";
 
 const menuItems: MenuItems = [
-    
+
 ];
 
 const Layout: FC = ({ children }) => {
@@ -45,6 +46,7 @@ const Layout: FC = ({ children }) => {
                         </div>
                     </div>
                 </main>
+                <Footer menuItems={menuItems} />
             </div>
         </>
     );

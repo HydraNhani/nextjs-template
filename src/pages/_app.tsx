@@ -19,7 +19,6 @@ import { getCookie, setCookies } from "cookies-next";
 //Type imports
 import type { FC } from "react";
 import type { ComponentWithConfigurationProps, CustomComponentType, ColorScheme } from "@types";
-import config from "config.json";
 
 const CustomComponent: FC<{
     Component: CustomComponentType;
@@ -30,8 +29,8 @@ const CustomComponent: FC<{
     //Loading Screen
     const [done, setDone] = useState(
         !Component.authenticationRequired &&
-            !Component.adminRoleRequired &&
-            !Component.noAuthenticationRequired
+        !Component.adminRoleRequired &&
+        !Component.noAuthenticationRequired
     );
     //User
     const { user, loading } = useAuth();
@@ -73,7 +72,7 @@ const CustomComponent: FC<{
     if (done)
         return (
             <ColorSchemeProvider toggleColorScheme={(value) => {
-                setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+                setColorScheme(value || (colorScheme == 'dark' ? 'light' : 'dark'));
                 if (value == "dark") document.documentElement.classList.add("dark");
                 else document.documentElement.classList.remove("dark");
             }} colorScheme={colorScheme}>
@@ -82,8 +81,7 @@ const CustomComponent: FC<{
                     withNormalizeCSS
                     theme={{
                         fontFamily: "SOME_FONT_FAMILY_HERE",
-                        colorScheme: colorScheme,
-                        primaryColor: config.primaryColor
+                        colorScheme: colorScheme
                     }}>
                     <NotificationsProvider>
                         <Layout>
@@ -109,7 +107,7 @@ function MyApp({ Component, pageProps }: ComponentWithConfigurationProps) {
             <ReduxProvider store={store}> {/*Provider which adds Redux to our React application*/}
                 <FirebaseAuthProvider> {/*Provider which adds Firebase Authentication, a service for managing user accounts*/}
                     <ApolloProvider client={apolloClient}> {/*Provider which adds Apollo, a GraphQL client*/}
-                        <CustomComponent Component={Component} pageProps={pageProps}/> {/*Component which handles authentication and loading screen*/}
+                        <CustomComponent Component={Component} pageProps={pageProps} /> {/*Component which handles authentication and loading screen*/}
                     </ApolloProvider>
                 </FirebaseAuthProvider>
             </ReduxProvider>

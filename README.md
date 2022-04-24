@@ -28,7 +28,7 @@ npm install <package_name>
 npm install graphql
 ```
 ```bash
-npm install react@17.0.2 react-dom@17.0.2 @apollo/client @headlessui/react @heroicons/react @mantine/core @mantine/hooks @mantine/next @mantine/notifications @prisma/client @reduxjs/toolkit @tailwindcss/forms apollo-server-micro class-validator firebase framer-motion graphql@15.8.0 graphql-fields graphql-scalars omit react-error-boundary react-firebase-hooks react-firebaseui react-redux redux reflect-metadata sass sharp tailwind-merge tslib type-graphql cookies-next
+npm install react@17.0.2 react-dom@17.0.2 @apollo/client @headlessui/react @heroicons/react @mantine/core @mantine/hooks @mantine/next @mantine/notifications @prisma/client @reduxjs/toolkit @tailwindcss/forms apollo-server-micro class-validator firebase framer-motion graphql@15.8.0 graphql-fields graphql-scalars omit react-error-boundary react-firebase-hooks react-firebaseui react-redux redux reflect-metadata sass sharp tailwind-merge tslib type-graphql cookies-next tabler-icons-react
 ```
 
 [`@apollo/client`](https://www.apollographql.com/docs/react/) - A fully-featured caching GraphQL client. (required for GraphQL)
@@ -185,10 +185,6 @@ Edit the font style by going to `./src/styles/globals.scss` and edit the `font-f
 Also go to `./src/pages/_app.tsx` and go to the `MantineProvider` and edit the `theme` object
 
 `SOME_FONT_FAMILY_HERE` is the default value
-
-## Primary Color
-
-Edit the primary color by going to `./config.json` and edit the property `primaryColor`
 
 # Getting Started
 
