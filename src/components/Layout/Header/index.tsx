@@ -9,6 +9,7 @@ import Motion from "@components/Motion";
 import { useBooleanToggle } from "@mantine/hooks";
 import ThemeToggler from "@components/Layout/Header/ThemeToggler";
 import HeaderAccountActions from "@components/Layout/Header/HeaderAccountActions";
+import Constants from "@constants/index";
 
 const Header: FC<{
     menuItems: MenuItems;
@@ -49,7 +50,7 @@ const Header: FC<{
             <Container>
                 <div className="h-14 flex justify-between items-center">
                     <Link>
-                        <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={process.env.APPLICATION_NAME} radius="xl" size={40} />
+                        <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={Constants.APPLICATION_NAME} radius="xl" size={40} />
                     </Link>
                     <Group spacing={5} className="hidden sm:flex">
                         {items}
@@ -68,7 +69,7 @@ const Header: FC<{
                                         </UnstyledButton>
                                     }
                                 >
-                                <HeaderAccountActions/>
+                                    <HeaderAccountActions />
                                 </Menu>
                             </Motion>
                         }
@@ -77,7 +78,7 @@ const Header: FC<{
                         <Burger opened={opened} onClick={() => toggleOpened()} size="sm" />
                     }>
                         <Menu.Item component={Center}>
-                            <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={process.env.APPLICATION_NAME} radius="xl" size={40} />
+                            <Avatar className="bg-lightmodetext dark:bg-darkmodetext" src={"/favicon.ico"} alt={Constants.APPLICATION_NAME} radius="xl" size={40} />
                         </Menu.Item>
                         {links.map(link => (
                             <Menu.Item component={Center} key={link.label}>
@@ -101,7 +102,7 @@ const Header: FC<{
                                     {user.email}
                                 </Text>
                             </Menu.Item>
-                            <HeaderAccountActions/>
+                            <HeaderAccountActions />
                         </>}
                         <Menu.Label>Theme</Menu.Label>
                         <Menu.Item component={Center}>

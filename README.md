@@ -164,9 +164,15 @@ There is also a file called `TODOS.md` in the root directory where you can add t
 
 `DATABASE_URL` - The MongoDB uri 
 
+### Also configure these constants in `./constants/index.ts`
+
 `APPLICATION_NAME` - The website name
 
 `APPLICATION_DESCRIPTION` - Some fallback description of the website
+
+# Tab Settings
+
+### You have to configure the tabs the user can access in the `./src/components/Layout/index.tsx` file
 
 ## Types
 

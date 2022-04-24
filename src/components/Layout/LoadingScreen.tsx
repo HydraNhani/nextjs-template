@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import Util from "@util";
 import styles from "@components/Layout/LoadingScreen.module.scss";
+import Constants from "@constants/index";
 
 /**
  * [Documentation](https://codepen.io/aaroniker/pen/MWgRBdV)
@@ -15,7 +16,7 @@ const LoadingScreen: FC = () => {
                 ))}
                 <div className={styles.ground}><div/></div>
             </div>
-            <small className="block absolute bottom-45 text-2xl sm:text-5xl text-lightmodetext dark:text-darkmodetext text-center"> {process.env.APPLICATION_NAME} </small>
+            <small className="block absolute bottom-45 text-2xl sm:text-5xl text-lightmodetext dark:text-darkmodetext text-center"> {Constants.APPLICATION_NAME} </small>
         </div>
     );
 };

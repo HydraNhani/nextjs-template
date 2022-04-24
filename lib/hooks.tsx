@@ -10,6 +10,7 @@ import Link from "@components/Link";
 import { Button } from '@mantine/core';
 import type { QueryResultType, MetaProps, User, OperationVariables, gql as GQLType, QueryHookOptions } from "@types";
 import { useQuery, gql } from "@apollo/client";
+import Constants from "@constants/index";
 
 export const useAuth = useAuthentication;
 
@@ -87,7 +88,7 @@ export function useDescription() {
     const dispatch = Util.StateManagement.useDispatch();
     function setDescription(description?: string) {
         useEffect(() => {
-            dispatch(Util.StateManagement.setDescription(description || process.env.APPLICATION_DESCRIPTION));
+            dispatch(Util.StateManagement.setDescription(description || Constants.APPLICATION_DESCRIPTION));
         }, []);
     }
     return { description, setDescription };
