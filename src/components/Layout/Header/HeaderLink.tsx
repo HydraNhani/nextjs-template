@@ -7,7 +7,7 @@ type HeaderLinkProps = PropsWithChildren<LinkProps>;
 
 const HeaderLink = forwardRef<HTMLAnchorElement, HeaderLinkProps>((props, ref) => {
     return (
-        <Link {...props} className="block py-2 px-3 rounded-sm hover:bg-lightmodeheader dark:hover:bg-darkmodeheader" ref={ref}/>
+        <Link {...props} className="block py-1 px-2 rounded-sm hover:bg-lightmodesecondary dark:hover:bg-darkmodesecondary" ref={ref}/>
     );
 });
 

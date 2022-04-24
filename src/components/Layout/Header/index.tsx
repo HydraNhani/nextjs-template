@@ -1,13 +1,13 @@
 import type { FC } from "react";
-import { createStyles, Header as MantineHeader, Menu, Group, Center, Burger, Container } from "@mantine/core";
+import { Header as MantineHeader, Menu, Group, Center, Container } from "@mantine/core";
 import { ChevronDownIcon } from "@heroicons/react/outline";
 import Logo from "@public/favicon.ico";
 import Image from "next/image";
-import type { HeaderMenuItems } from "@types";
+import type { MenuItems } from "@types";
 import HeaderLink from "@components/Layout/Header/HeaderLink";
 
 const Header: FC<{
-    menuItems: HeaderMenuItems;
+    menuItems: MenuItems;
 }> = ({ menuItems: links }) => {
     const items = links.map((link) => {
         const menuItems = link.links?.map((item) => (
@@ -25,7 +25,7 @@ const Header: FC<{
                     <HeaderLink href={link.link}>
                         <Center component="a">
                             <span className="mr-1">{link.label}</span>
-                            <ChevronDownIcon className="h-3 p-3"/>
+                            <ChevronDownIcon className="h-3 w-3 text-lightmodetext dark:text-darkmodetext"/>
                         </Center>
                     </HeaderLink>
                 }>{menuItems}</Menu>
@@ -37,7 +37,7 @@ const Header: FC<{
         );
     });
     return (
-        <MantineHeader height={56} className="" mb={120}>
+        <MantineHeader className="sticky bg-lightmodeprimary dark:bg-darkmodeprimary" height={56}>
             <Container>
                 <div className="h-14 flex justify-between items-center">
                     <Image src={Logo}/>

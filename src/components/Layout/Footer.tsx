@@ -17,13 +17,13 @@ const Footer: FC<{
         ));
         return (
             <div className="w-40" key={group.label}>
-                <Text sx={{ marginBottom: theme.spacing.xs / 2 }} className="text-lg text-lightmodetext dark:text-darkmodetext">{group.label}</Text>
+                <Text sx={{ marginBottom: theme.spacing.xs / 2 }} className="font-bold text-lg text-lightmodetext dark:text-darkmodetext">{group.label}</Text>
                 {links}
             </div>
         );
     });
     return (
-        <footer style={{ paddingTop: theme.spacing.xl * 2, paddingBottom: theme.spacing.xl * 2 }} className="mt-28">
+        <footer style={{ paddingTop: theme.spacing.xl * 2, paddingBottom: theme.spacing.xl * 2 }} className="mt-28 bg-lightmodeprimary dark:bg-darkmodeprimary">
             <Container className="flex justify-between flex-col sm:flex-row text-center sm:text-left">
                 <div className="flex flex-col items-center sm:block sm:flex-row sm:items-start" style={{ maxWidth: 200 }}>
                     <Image src={Logo} />
@@ -33,11 +33,11 @@ const Footer: FC<{
                 </div>
                 <div className="sm:flex flex-wrap hidden">{groups}</div>
             </Container>
-            <Container sx={{ marginTop: theme.spacing.xl, paddingTop: theme.spacing.xl, paddingBottom: theme.spacing.xl }} className="flex justify-between items-center">
-                <Text color="dimmed" size="sm">
+            <Container sx={{ marginTop: theme.spacing.xl, paddingTop: theme.spacing.xl, paddingBottom: theme.spacing.xl }} className="border-t solid flex justify-between items-center">
+                <Text className="text-center sm:text-left" color="dimmed" size="sm">
                     © 2022 Classic Games Web. All rights reserved.
                 </Text>
-                <Group spacing={0} className="" position="right" noWrap>
+                <Group spacing={0} className="flex-wrap hidden sm:flex" position="right" noWrap>
                     <ActionIcon size="lg">
                         <BrandTwitter size={18} />
                     </ActionIcon>

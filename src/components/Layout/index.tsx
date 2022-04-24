@@ -4,15 +4,17 @@ import Script from "next/script";
 import Util from "@util";
 import Header from "@components/Layout/Header";
 import Footer from "@components/Layout/Footer";
+import { Container, Text, Title, useMantineTheme } from "@mantine/core";
 import type { MenuItems } from "@types";
 
 const menuItems: MenuItems = [
-
+    
 ];
 
 const Layout: FC = ({ children }) => {
     //Page info states
     const { title, header, description, scripts, meta } = Util.StateManagement.useSelector(state => state.layout);
+    const theme = useMantineTheme();
     return (
         <>
             <Head>
@@ -26,25 +28,23 @@ const Layout: FC = ({ children }) => {
             </Head>
             <div>
                 <Header menuItems={menuItems} />
-                <main>
+                <main className="min-h-screen">
                     {/*ADDITIONAL SCRIPTS*/}
                     {scripts ? scripts.map((scriptSRC, index) => (
                         <Script key={index} type="text/javascript" src={scriptSRC} crossOrigin="anonymous" />
                     )) : undefined}
-                    <div className="py-12 bg-transparent min-h-screen">
-                        <div className="mx-auto px-2 sm:px-4 md:px-6 lg:px-8">
-                            <div className="text-center">
-                                <h2 className="text-base text-primary font-semibold tracking-wide uppercase">{process.env.APPLICATION_NAME}</h2>
-                                <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-lightmodeprimary dark:text-darkmodeprimary sm:text-4xl">
-                                    {header ? header : title}
-                                </p>
-                                <p className="mt-4 text-3xl text-gray-700 lg:mx-auto font-coc-description">
-                                    {description}
-                                </p>
-                            </div>
-                            <div className="mt-10 z-0 mb-0 mx-auto"> {children} </div>
-                        </div>
-                    </div>
+                    <Container>
+                        <Text className="text-center uppercase font-extrabold text-sm">{process.env.APPLICATION_NAME}</Text>
+                        <Title sx={{ marginTop: theme.spacing.xl }} className="text-center text-4xl" order={2}>
+                            {header ? header : title}
+                        </Title>
+                        <Container size={660} p={0}>
+                            <Text sx={{ marginTop: theme.spacing.xs }} color="dimmed" className="text-center text-xl">
+                                {description ? description : `${process.env.APPLICATION_NAME} ${process.env.APPLICATION_DESCRIPTION}`}
+                            </Text>
+                        </Container>
+                        <div className="mt-10 z-0 mb-0 mx-auto"> {children} </div>
+                    </Container>
                 </main>
                 <Footer menuItems={menuItems} />
             </div>
