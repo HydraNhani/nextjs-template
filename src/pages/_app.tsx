@@ -18,7 +18,8 @@ import { useColorScheme } from "@mantine/hooks";
 import { getCookie, setCookies } from "cookies-next";
 //Type imports
 import type { FC } from "react";
-import type { ComponentWithConfigurationProps, CustomComponentType, ColorScheme } from "@types";
+import type { ComponentWithConfigurationProps, CustomComponentType } from "@types";
+import type { ColorScheme } from "@mantine/core";
 
 const CustomComponent: FC<{
     Component: CustomComponentType;
@@ -29,8 +30,8 @@ const CustomComponent: FC<{
     //Loading Screen
     const [done, setDone] = useState(
         !Component.authenticationRequired &&
-        !Component.adminRoleRequired &&
-        !Component.noAuthenticationRequired
+            !Component.adminRoleRequired &&
+            !Component.noAuthenticationRequired
     );
     //User
     const { user, loading } = useAuth();
@@ -72,15 +73,19 @@ const CustomComponent: FC<{
     if (done)
         return (
             <ColorSchemeProvider toggleColorScheme={(value) => {
-                setColorScheme(value || (colorScheme == 'dark' ? 'light' : 'dark'));
-                if (value == "dark") document.documentElement.classList.add("dark");
+                setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+                setCookies("mode", value || (colorScheme === 'dark' ? 'light' : 'dark'), {
+                    expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 720),
+                    path: "/"
+                });
+                if (value || (colorScheme === 'dark' ? 'light' : 'dark') == "dark") document.documentElement.classList.add("dark");
                 else document.documentElement.classList.remove("dark");
             }} colorScheme={colorScheme}>
                 <MantineProvider
                     withGlobalStyles
                     withNormalizeCSS
                     theme={{
-                        fontFamily: "SOME_FONT_FAMILY_HERE",
+                        fontFamily: "Titillium Web",
                         colorScheme: colorScheme
                     }}>
                     <NotificationsProvider>
@@ -107,7 +112,7 @@ function MyApp({ Component, pageProps }: ComponentWithConfigurationProps) {
             <ReduxProvider store={store}> {/*Provider which adds Redux to our React application*/}
                 <FirebaseAuthProvider> {/*Provider which adds Firebase Authentication, a service for managing user accounts*/}
                     <ApolloProvider client={apolloClient}> {/*Provider which adds Apollo, a GraphQL client*/}
-                        <CustomComponent Component={Component} pageProps={pageProps} /> {/*Component which handles authentication and loading screen*/}
+                        <CustomComponent Component={Component} pageProps={pageProps}/> {/*Component which handles authentication and loading screen*/}
                     </ApolloProvider>
                 </FirebaseAuthProvider>
             </ReduxProvider>
