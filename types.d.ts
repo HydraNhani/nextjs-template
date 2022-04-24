@@ -107,7 +107,8 @@ export interface MotionProps {
 
 //Component Types
 import type { PropsWithChildren } from "react";
-export type LinkProps = PropsWithChildren<JSX.IntrinsicElements["a"]> & MotionProps & {
+import type { TextProps } from "@mantine/core";
+export type LinkProps = PropsWithChildren<TextProps<"a">> & MotionProps & {
     href?: string;
 };
 export interface MenuItem {

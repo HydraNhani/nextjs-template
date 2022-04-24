@@ -8,7 +8,20 @@ import { Container, Text, Title, useMantineTheme } from "@mantine/core";
 import type { MenuItems } from "@types";
 
 const menuItems: MenuItems = [
-    
+    {
+        label: "Authentication",
+        link: "/auth",
+        links: [
+            {
+                label: "Sign in",
+                link: "/auth"
+            },
+            {
+                label: "Sign Up",
+                link: "/auth"
+            }
+        ]
+    }
 ];
 
 const Layout: FC = ({ children }) => {
